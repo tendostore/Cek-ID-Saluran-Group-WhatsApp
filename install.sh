@@ -4,15 +4,19 @@ echo "=================================================="
 echo "  Memulai Instalasi Bot WhatsApp (Notifikasi) "
 echo "=================================================="
 
+# Menonaktifkan semua popup interaktif pada terminal (Auto Yes)
+export DEBIAN_FRONTEND=noninteractive
+
 # 1. Update sistem & install dependency dasar
 echo "[1/6] Memperbarui sistem dan menginstal dependensi dasar..."
-apt-get update && apt-get upgrade -y
-apt-get install -y curl wget git jq
+apt-get update -y
+apt-get upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+apt-get install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" curl wget git jq
 
 # 2. Install Node.js v20 & PM2
 echo "[2/6] Menginstal Node.js v20 dan PM2..."
 curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-apt-get install -y nodejs
+apt-get install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" nodejs
 npm install -g pm2
 
 # 3. Setup Direktori Proyek & Folder Data
